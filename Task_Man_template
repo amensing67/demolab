@@ -1,0 +1,1836 @@
+{
+	"status": {},
+	"spec": {
+		"name": "TaskMan",
+		"description": "To access the Task Manager Application:\n1. Launch a browser console\n2. Navigate to http://@@{WebServer.address}@@",
+		"resources": {
+			"service_definition_list": [
+				{
+					"name": "MySQL",
+					"description": "",
+					"variable_list": [],
+					"action_list": [
+						{
+							"type": "system",
+							"name": "action_create",
+							"description": "System action for creating an application",
+							"runbook": {
+								"name": "391019fe_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "3864770f_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "3864770f_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_delete",
+							"description": "System action for deleting an application. Deletes created VMs as well",
+							"runbook": {
+								"name": "1f61d330_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "c808b4d2_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "c808b4d2_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_restart",
+							"description": "System action for restarting an application",
+							"runbook": {
+								"name": "e06cf8a3_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "c553f39d_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "c553f39d_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_start",
+							"description": "System action for starting an application",
+							"runbook": {
+								"name": "6a1f0f7d_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "d62872bf_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "d62872bf_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_stop",
+							"description": "System action for stopping an application",
+							"runbook": {
+								"name": "4894d126_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "cb30ec1b_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "cb30ec1b_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "user",
+							"name": "Join Domain",
+							"description": "",
+							"runbook": {
+								"name": "8e09155b_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "621b6b28_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [
+											{
+												"name": "Register Machine",
+												"kind": "app_task"
+											}
+										],
+										"variable_list": [],
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									},
+									{
+										"type": "EXEC",
+										"name": "Register Machine",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"script": "sudo yum install -y realmd \\\noddjob \\\noddjob-mkhomedir \\\nsssd \\\nadcli \\\nsamba-common-tools \\\nkrb5-workstation\n\necho \"@@{address}@@ @@{name}@@.@@{Domain}@@ @@{name}@@\" | sudo tee -a /etc/hosts\n\necho @@{CRED_DC.secret}@@ | sudo realm join @@{Domain}@@ --verbose -U Administrator\nsudo realm list\n\nsudo systemctl restart sssd\n\nsudo realm permit -g '@@{AD_ADMINGROUP}@@'",
+											"script_type": "sh",
+											"command_line_args": "",
+											"exit_status": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "621b6b28_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "user",
+							"name": "Leave Domain",
+							"description": "",
+							"runbook": {
+								"name": "7700ee8f_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "c5fe7624_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [
+											{
+												"name": "Unregister Machine",
+												"kind": "app_task"
+											}
+										],
+										"variable_list": [],
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									},
+									{
+										"type": "EXEC",
+										"name": "Unregister Machine",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"script": "computername=$(hostname -s)\n\nsudo kinit -kt /etc/krb5.keytab ${computername^^}$\nsudo nsupdate -g -v <<EOF\nupdate delete `hostname -f`. A\nsend\nEOF\n\necho @@{CRED_DC.secret}@@ | sudo realm leave --remove --verbose @@{Domain}@@",
+											"script_type": "sh",
+											"command_line_args": "",
+											"exit_status": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "c5fe7624_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						}
+					],
+					"depends_on_list": [],
+					"port_list": [],
+					"singleton": false,
+					"tier": ""
+				},
+				{
+					"name": "WebServer",
+					"description": "",
+					"variable_list": [],
+					"action_list": [
+						{
+							"type": "system",
+							"name": "action_create",
+							"description": "System action for creating an application",
+							"runbook": {
+								"name": "e6e5618f_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "25cb4311_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [
+											{
+												"name": "Configure_WebServer",
+												"kind": "app_task"
+											}
+										],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									},
+									{
+										"type": "EXEC",
+										"name": "Configure_WebServer",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"script": "#!/bin/bash\nset -ex\n\n# Verzeichnis anlegen\nsudo mkdir -p /var/www/laravel\n\n# Nginx Konfiguration schreiben\necho \"server {\n listen 80 default_server;\n listen [::]:80 default_server ipv6only=on;\n root /var/www/laravel/public/;\n index index.php index.html index.htm;\n location / {\n  try_files \\$uri \\$uri/ /index.php?\\$query_string;\n }\n # pass the PHP scripts to FastCGI server listening on /var/run/php5-fpm.sock\n location ~ \\.php$ {\n  try_files \\$uri /index.php =404;\n  fastcgi_split_path_info ^(.+\\.php)(/.+)\\$;\n  fastcgi_pass 127.0.0.1:9000;\n  fastcgi_index index.php;\n  fastcgi_param SCRIPT_FILENAME \\$document_root\\$fastcgi_script_name;\n  include fastcgi_params;\n }\n}\" | sudo tee /etc/nginx/conf.d/laravel.conf\n\nsudo sed -i 's/80 default_server/80/g' /etc/nginx/nginx.conf\n\n# PHP cgi.fix_pathinfo setzen\nif grep -q \"cgi.fix_pathinfo\" /etc/php.ini ; then\n sudo sed -i 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php.ini\nelse\n sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php.ini\nfi\n\n# ==========================================================\n# NEU: PHP-FPM für Nginx und Port 9000 konfigurieren (Rocky 9 Fix)\n# ==========================================================\nsudo sed -i 's/user = apache/user = nginx/g' /etc/php-fpm.d/www.conf\nsudo sed -i 's/group = apache/group = nginx/g' /etc/php-fpm.d/www.conf\nsudo sed -i 's|listen = /run/php-fpm/www.sock|listen = 127.0.0.1:9000|g' /etc/php-fpm.d/www.conf\n# ==========================================================\n\nsudo systemctl enable php-fpm\nsudo systemctl enable nginx\nsudo systemctl restart php-fpm\nsudo systemctl restart nginx\n\n# Composer installieren\nif [ ! -e /usr/local/bin/composer ]; then\n curl -sS https://getcomposer.org/installer | php\n sudo mv composer.phar /usr/local/bin/composer\n sudo chmod +x /usr/local/bin/composer\nfi\n\n# Laravel Code klonen (über /tmp, da das Zielverzeichnis schon existiert)\nsudo git clone https://github.com/ideadevice/quickstart-basic.git /tmp/laravel-temp\nsudo cp -r /tmp/laravel-temp/* /var/www/laravel/\nsudo cp -r /tmp/laravel-temp/.[a-zA-Z0-9]* /var/www/laravel/ || true\n\n# Falls das Repo keine .env hat, kopieren wir die Example\nif [ ! -f /var/www/laravel/.env ]; then\n  sudo cp /var/www/laravel/.env.example /var/www/laravel/.env\nfi\n\n# Datenbank-Host dynamisch mit der IP-Adresse der Datenbank-VM eintragen\nsudo sed -i 's/DB_HOST=.*/DB_HOST=@@{MySQL.address}@@/' /var/www/laravel/.env\n\n# Composer Install (mit ignore-platform-reqs für ältere Laravel Versionen)\nsudo su - -c \"cd /var/www/laravel; composer install --ignore-platform-reqs\"\n\n# Datenbank-Migration nur auf der ersten VM (calm_array_index == 0) ausführen\nif [ \"@@{calm_array_index}@@\" == \"0\" ]; then\n sudo su - -c \"cd /var/www/laravel; php artisan migrate\"\nfi\n\n# Berechtigungen setzen und Webserver final neustarten\nsudo chown -R nginx:nginx /var/www/laravel\nsudo chmod -R 777 /var/www/laravel/\nsudo systemctl restart nginx",
+											"script_type": "sh",
+											"command_line_args": "",
+											"exit_status": [],
+											"login_credential_local_reference": {
+												"name": "CENTOS_PASS",
+												"kind": "app_credential"
+											}
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "25cb4311_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_delete",
+							"description": "System action for deleting an application. Deletes created VMs as well",
+							"runbook": {
+								"name": "24fd5397_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "91032ab2_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "91032ab2_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_restart",
+							"description": "System action for restarting an application",
+							"runbook": {
+								"name": "918a003d_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "0a7a195c_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "0a7a195c_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_start",
+							"description": "System action for starting an application",
+							"runbook": {
+								"name": "09a8c9a1_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "cbb0ed35_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "cbb0ed35_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_stop",
+							"description": "System action for stopping an application",
+							"runbook": {
+								"name": "bc0805c9_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "d5ab7792_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "d5ab7792_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "user",
+							"name": "Join Domain",
+							"description": "",
+							"runbook": {
+								"name": "d072c241_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "93bfb7b9_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [
+											{
+												"name": "Register Machine",
+												"kind": "app_task"
+											}
+										],
+										"variable_list": [],
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									},
+									{
+										"type": "EXEC",
+										"name": "Register Machine",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"script": "sudo yum install -y realmd \\\noddjob \\\noddjob-mkhomedir \\\nsssd \\\nadcli \\\nsamba-common-tools \\\nkrb5-workstation\n\necho \"@@{address}@@ @@{name}@@.@@{Domain}@@ @@{name}@@\" | sudo tee -a /etc/hosts\n\necho @@{CRED_DC.secret}@@ | sudo realm join @@{Domain}@@ --verbose -U Administrator\nsudo realm list\n\nsudo systemctl restart sssd\n\nsudo realm permit -g '@@{AD_ADMINGROUP}@@'",
+											"script_type": "sh",
+											"command_line_args": "",
+											"exit_status": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "93bfb7b9_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "user",
+							"name": "Leave Domain",
+							"description": "",
+							"runbook": {
+								"name": "1604cef0_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "54dd86a9_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [
+											{
+												"name": "Unregister Machine",
+												"kind": "app_task"
+											}
+										],
+										"variable_list": [],
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									},
+									{
+										"type": "EXEC",
+										"name": "Unregister Machine",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"script": "computername=$(hostname -s)\n\nsudo kinit -kt /etc/krb5.keytab ${computername^^}$\nsudo nsupdate -g -v <<EOF\nupdate delete `hostname -f`. A\nsend\nEOF\n\necho @@{CRED_DC.secret}@@ | sudo realm leave --remove --verbose @@{Domain}@@",
+											"script_type": "sh",
+											"command_line_args": "",
+											"exit_status": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "54dd86a9_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						}
+					],
+					"depends_on_list": [
+						{
+							"kind": "app_service",
+							"name": "MySQL"
+						}
+					],
+					"port_list": [],
+					"singleton": false,
+					"tier": ""
+				}
+			],
+			"published_service_definition_list": [],
+			"substrate_definition_list": [
+				{
+					"type": "AHV_VM",
+					"name": "MySQL_AHV",
+					"description": "",
+					"variable_list": [],
+					"action_list": [
+						{
+							"type": "fragment",
+							"name": "pre_action_create",
+							"description": "",
+							"runbook": {
+								"name": "7bf73732_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "8b1f106b_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL_AHV",
+											"kind": "app_substrate"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "8b1f106b_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "fragment",
+							"name": "post_action_create",
+							"description": "",
+							"runbook": {
+								"name": "b75a2fd7_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "ab43e94b_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL_AHV",
+											"kind": "app_substrate"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "ab43e94b_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "fragment",
+							"name": "post_action_delete",
+							"description": "",
+							"runbook": {
+								"name": "01ca8bc1_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "7be65f51_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "MySQL_AHV",
+											"kind": "app_substrate"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "7be65f51_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						}
+					],
+					"editables": {
+						"create_spec": {
+							"resources": {
+								"nic_list": {},
+								"serial_port_list": {},
+								"boot_config": {},
+								"disk_list": {}
+							},
+							"categories": true
+						}
+					},
+					"create_spec": {
+						"type": "",
+						"name": "TaskDB-@@{user_initials}@@",
+						"availability_zone_reference": null,
+						"backup_policy": null,
+						"cluster_reference": {
+							"type": "",
+							"kind": "cluster",
+							"name": "DM3-POC140",
+							"uuid": "00064f93-0b03-4ea5-0a1f-a088c250260e"
+						},
+						"resources": {
+							"type": "",
+							"nic_list": [
+								{
+									"type": "",
+									"nic_type": "NORMAL_NIC",
+									"subnet_reference": {
+										"type": "",
+										"kind": "subnet",
+										"name": "primary",
+										"uuid": "c20f390f-2b93-4d2f-a187-f5577d73c0a9"
+									},
+									"network_function_nic_type": "INGRESS",
+									"mac_address": "",
+									"ip_endpoint_list": [],
+									"network_function_chain_reference": null,
+									"vpc_reference": null
+								}
+							],
+							"power_state": "ON",
+							"guest_tools": null,
+							"num_vcpus_per_socket": 1,
+							"num_sockets": 2,
+							"memory_size_mib": 4096,
+							"gpu_list": [],
+							"parent_reference": null,
+							"hardware_clock_timezone": "",
+							"account_uuid": "e2605c5c-15c4-4e75-af60-b4430e3093bf",
+							"guest_customization": {
+								"type": "",
+								"cloud_init": {
+									"type": "",
+									"meta_data": "",
+									"user_data": "#cloud-config\nhostname: @@{name}@@\nfqdn: @@{name}@@.@@{Domain}@@\nusers:\n  - name: centos\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    @@{CENTOS_PASS.username}@@:@@{CENTOS_PASS.secret}@@\n  expire: False\nssh_pwauth:   true\nruncmd:\n  - [sudo, systemctl, restart, network]"
+								},
+								"sysprep": null
+							},
+							"boot_config": {
+								"type": "",
+								"boot_device": {
+									"type": "",
+									"disk_address": {
+										"type": "",
+										"device_index": 0,
+										"adapter_type": "SCSI"
+									}
+								},
+								"mac_address": "",
+								"boot_type": ""
+							},
+							"vtpm_config": null,
+							"disk_list": [
+								{
+									"type": "",
+									"data_source_reference": {
+										"type": "",
+										"kind": "image",
+										"name": "Rocky-9-GenericCloud-Base.latest.x86_64.qcow2",
+										"uuid": "3885d4a0-ce35-4091-953e-3a9cd9d9d401"
+									},
+									"volume_group_reference": null,
+									"device_properties": {
+										"type": "",
+										"disk_address": {
+											"type": "",
+											"device_index": 0,
+											"adapter_type": "SCSI"
+										},
+										"device_type": "DISK"
+									},
+									"disk_size_mib": 10240
+								}
+							],
+							"serial_port_list": []
+						},
+						"categories": {
+							"AppTier": "DB",
+							"AppType": "TaskMan"
+						}
+					},
+					"os_type": "Linux",
+					"readiness_probe": {
+						"login_credential_local_reference": {
+							"name": "CENTOS_PASS",
+							"kind": "app_credential"
+						},
+						"connection_type": "SSH",
+						"connection_port": 22,
+						"delay_secs": "30",
+						"retries": "20",
+						"address": "@@{platform.status.resources.nic_list[0].ip_endpoint_list[0].ip}@@",
+						"disable_readiness_probe": false,
+						"connection_protocol": ""
+					}
+				},
+				{
+					"type": "AHV_VM",
+					"name": "WebServer_AHV",
+					"description": "",
+					"variable_list": [],
+					"action_list": [
+						{
+							"type": "fragment",
+							"name": "pre_action_create",
+							"description": "",
+							"runbook": {
+								"name": "f359a64e_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "94933c08_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer_AHV",
+											"kind": "app_substrate"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "94933c08_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "fragment",
+							"name": "post_action_delete",
+							"description": "",
+							"runbook": {
+								"name": "76247202_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "e08a7c6a_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "WebServer_AHV",
+											"kind": "app_substrate"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "e08a7c6a_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						}
+					],
+					"editables": {
+						"create_spec": {
+							"resources": {
+								"nic_list": {},
+								"serial_port_list": {},
+								"boot_config": {},
+								"disk_list": {}
+							},
+							"categories": true
+						}
+					},
+					"create_spec": {
+						"type": "",
+						"name": "TaskWeb-@@{user_initials}@@",
+						"availability_zone_reference": null,
+						"backup_policy": null,
+						"cluster_reference": {
+							"type": "",
+							"kind": "cluster",
+							"name": "DM3-POC140",
+							"uuid": "00064f93-0b03-4ea5-0a1f-a088c250260e"
+						},
+						"resources": {
+							"type": "",
+							"nic_list": [
+								{
+									"type": "",
+									"nic_type": "NORMAL_NIC",
+									"subnet_reference": {
+										"type": "",
+										"kind": "subnet",
+										"name": "primary",
+										"uuid": "c20f390f-2b93-4d2f-a187-f5577d73c0a9"
+									},
+									"network_function_nic_type": "INGRESS",
+									"mac_address": "",
+									"ip_endpoint_list": [],
+									"network_function_chain_reference": null,
+									"vpc_reference": null
+								}
+							],
+							"power_state": "ON",
+							"guest_tools": null,
+							"num_vcpus_per_socket": 1,
+							"num_sockets": 2,
+							"memory_size_mib": 4096,
+							"gpu_list": [],
+							"parent_reference": null,
+							"hardware_clock_timezone": "",
+							"account_uuid": "e2605c5c-15c4-4e75-af60-b4430e3093bf",
+							"guest_customization": {
+								"type": "",
+								"cloud_init": {
+									"type": "",
+									"meta_data": "",
+									"user_data": "#cloud-config\nhostname: @@{name}@@\nfqdn: @@{name}@@.@@{Domain}@@\nusers:\n  - name: centos\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    @@{CENTOS_PASS.username}@@:@@{CENTOS_PASS.secret}@@\n  expire: False\nssh_pwauth:   true\nruncmd:\n  - [sudo, systemctl, restart, network]"
+								},
+								"sysprep": null
+							},
+							"boot_config": {
+								"type": "",
+								"boot_device": {
+									"type": "",
+									"disk_address": {
+										"type": "",
+										"device_index": 0,
+										"adapter_type": "SCSI"
+									}
+								},
+								"mac_address": "",
+								"boot_type": ""
+							},
+							"vtpm_config": null,
+							"disk_list": [
+								{
+									"type": "",
+									"data_source_reference": {
+										"type": "",
+										"kind": "image",
+										"name": "Rocky-9-GenericCloud-Base.latest.x86_64.qcow2",
+										"uuid": "3885d4a0-ce35-4091-953e-3a9cd9d9d401"
+									},
+									"volume_group_reference": null,
+									"device_properties": {
+										"type": "",
+										"disk_address": {
+											"type": "",
+											"device_index": 0,
+											"adapter_type": "SCSI"
+										},
+										"device_type": "DISK"
+									},
+									"disk_size_mib": 10240
+								}
+							],
+							"serial_port_list": []
+						},
+						"categories": {
+							"AppTier": "Web",
+							"AppType": "TaskMan"
+						}
+					},
+					"os_type": "Linux",
+					"readiness_probe": {
+						"login_credential_local_reference": {
+							"name": "CENTOS_PASS",
+							"kind": "app_credential"
+						},
+						"connection_type": "SSH",
+						"connection_port": 22,
+						"delay_secs": "30",
+						"retries": "20",
+						"address": "@@{platform.status.resources.nic_list[0].ip_endpoint_list[0].ip}@@",
+						"disable_readiness_probe": false,
+						"connection_protocol": ""
+					}
+				}
+			],
+			"package_definition_list": [
+				{
+					"type": "SUBSTRATE_IMAGE",
+					"name": "CentOS_7_Cloud",
+					"description": "CentOS 7 Cloud Image",
+					"variable_list": [],
+					"action_list": [],
+					"service_local_reference_list": [],
+					"version": "",
+					"options": {
+						"type": "",
+						"name": "CentOS_7_Cloud",
+						"resources": {
+							"type": "",
+							"image_type": "DISK_IMAGE",
+							"checksum": {
+								"type": "",
+								"checksum_algorithm": "",
+								"checksum_value": ""
+							},
+							"source_uri": "https://storage.googleapis.com/testdrive-templates/library/images/CentOS-7-x86_64-1810.qcow2",
+							"version": {
+								"type": "",
+								"product_version": "7",
+								"product_name": "CentOS"
+							},
+							"architecture": "X86_64"
+						},
+						"description": ""
+					}
+				},
+				{
+					"type": "DEB",
+					"name": "MYSQL_PACKAGE",
+					"description": "",
+					"variable_list": [],
+					"action_list": [],
+					"service_local_reference_list": [
+						{
+							"name": "MySQL",
+							"kind": "app_service"
+						}
+					],
+					"version": "",
+					"options": {
+						"type": "",
+						"install_runbook": {
+							"name": "10424551_runbook",
+							"description": "",
+							"task_definition_list": [
+								{
+									"type": "DAG",
+									"name": "8c4ce4a6_dag",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"edges": [
+											{
+												"type": "",
+												"from_task_reference": {
+													"name": "Join Domain",
+													"kind": "app_task"
+												},
+												"to_task_reference": {
+													"name": "Install_sql",
+													"kind": "app_task"
+												},
+												"edge_type": "user_defined"
+											}
+										]
+									},
+									"child_tasks_local_reference_list": [
+										{
+											"name": "Join Domain",
+											"kind": "app_task"
+										},
+										{
+											"name": "Install_sql",
+											"kind": "app_task"
+										}
+									],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "MYSQL_PACKAGE",
+										"kind": "app_package"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "CALL_RUNBOOK",
+									"name": "Join Domain",
+									"description": "",
+									"attrs": {
+										"type": "CALL_RUNBOOK",
+										"runbook_reference": {
+											"name": "8e09155b_runbook",
+											"kind": "app_runbook"
+										},
+										"inarg_list": []
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "MySQL",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "EXEC",
+									"name": "Install_sql",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"script": "#!/bin/bash\nset -ex\n\n# MySQL 8.0 direkt aus den Rocky 9 Standard-Repos installieren\nsudo dnf install -y mysql-server\nsudo dnf update -y\n\n# SELinux und Firewall deaktivieren\nsudo setenforce 0 || true\nsudo sed -i 's/enforcing/disabled/g' /etc/selinux/config || true\nsudo systemctl stop firewalld || true\nsudo systemctl disable firewalld || true\n\n# MySQL Dienst starten\nsudo systemctl start mysqld\nsudo systemctl enable mysqld\n\n# MySQL secure installation (MySQL 8 Syntax mit Calm-Variablen)\n# Beim frischen Start erfordert root@localhost noch kein Passwort\nmysql -u root <<-EOF\n\nALTER USER '@@{Mysql_user}@@'@'localhost' IDENTIFIED BY '@@{Mysql_password}@@';\nDELETE FROM mysql.user WHERE User='@@{Mysql_user}@@' AND Host NOT IN ('localhost', '127.0.0.1', '::1');\nDELETE FROM mysql.user WHERE User='';\nDROP DATABASE IF EXISTS test;\nDELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';\n\nFLUSH PRIVILEGES;\nEOF\n\n# Projektdatenbank und App-User anlegen (Neuer Syntax für MySQL 8)\n# Ab hier loggen wir uns mit dem neuen Passwort ein\nmysql -u @@{Mysql_user}@@ -p'@@{Mysql_password}@@' <<-EOF\n\nCREATE DATABASE IF NOT EXISTS @@{Database_name}@@;\nCREATE USER IF NOT EXISTS '@@{Database_name}@@'@'%' IDENTIFIED BY 'secret';\nGRANT ALL PRIVILEGES ON @@{Database_name}@@.* TO '@@{Database_name}@@'@'%';\n\nFLUSH PRIVILEGES;\nEOF",
+										"script_type": "sh",
+										"command_line_args": "",
+										"exit_status": [],
+										"login_credential_local_reference": {
+											"name": "CENTOS_PASS",
+											"kind": "app_credential"
+										}
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "MySQL",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								}
+							],
+							"main_task_local_reference": {
+								"name": "8c4ce4a6_dag",
+								"kind": "app_task"
+							},
+							"variable_list": []
+						},
+						"uninstall_runbook": {
+							"name": "8670f89c_runbook",
+							"description": "",
+							"task_definition_list": [
+								{
+									"type": "DAG",
+									"name": "93139c02_dag",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"edges": [
+											{
+												"type": "",
+												"from_task_reference": {
+													"name": "Leave Domain",
+													"kind": "app_task"
+												},
+												"to_task_reference": {
+													"name": "Uninstall_sql",
+													"kind": "app_task"
+												},
+												"edge_type": "user_defined"
+											}
+										]
+									},
+									"child_tasks_local_reference_list": [
+										{
+											"name": "Leave Domain",
+											"kind": "app_task"
+										},
+										{
+											"name": "Uninstall_sql",
+											"kind": "app_task"
+										}
+									],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "MYSQL_PACKAGE",
+										"kind": "app_package"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "CALL_RUNBOOK",
+									"name": "Leave Domain",
+									"description": "",
+									"attrs": {
+										"type": "CALL_RUNBOOK",
+										"runbook_reference": {
+											"name": "7700ee8f_runbook",
+											"kind": "app_runbook"
+										},
+										"inarg_list": []
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "MySQL",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "EXEC",
+									"name": "Uninstall_sql",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"script": "#!/bin/bash\necho \"Goodbye!\"",
+										"script_type": "sh",
+										"command_line_args": "",
+										"exit_status": [],
+										"login_credential_local_reference": {
+											"name": "CENTOS_PASS",
+											"kind": "app_credential"
+										}
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "MySQL",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								}
+							],
+							"main_task_local_reference": {
+								"name": "93139c02_dag",
+								"kind": "app_task"
+							},
+							"variable_list": []
+						},
+						"upgrade_runbook": {}
+					}
+				},
+				{
+					"type": "DEB",
+					"name": "WebServer_PACKAGE",
+					"description": "",
+					"variable_list": [],
+					"action_list": [],
+					"service_local_reference_list": [
+						{
+							"name": "WebServer",
+							"kind": "app_service"
+						}
+					],
+					"version": "",
+					"options": {
+						"type": "",
+						"install_runbook": {
+							"name": "08800aa4_runbook",
+							"description": "",
+							"task_definition_list": [
+								{
+									"type": "DAG",
+									"name": "7c1beb17_dag",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"edges": [
+											{
+												"type": "",
+												"from_task_reference": {
+													"name": "Join Domain",
+													"kind": "app_task"
+												},
+												"to_task_reference": {
+													"name": "Install_Software",
+													"kind": "app_task"
+												},
+												"edge_type": "user_defined"
+											}
+										]
+									},
+									"child_tasks_local_reference_list": [
+										{
+											"name": "Join Domain",
+											"kind": "app_task"
+										},
+										{
+											"name": "Install_Software",
+											"kind": "app_task"
+										}
+									],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "WebServer_PACKAGE",
+										"kind": "app_package"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "CALL_RUNBOOK",
+									"name": "Join Domain",
+									"description": "",
+									"attrs": {
+										"type": "CALL_RUNBOOK",
+										"runbook_reference": {
+											"name": "d072c241_runbook",
+											"kind": "app_runbook"
+										},
+										"inarg_list": []
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "WebServer",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "EXEC",
+									"name": "Install_Software",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"script": "#!/bin/bash\nset -ex\n\n#sudo yum update -y\n#sudo yum -y install epel-release\nsudo setenforce 0\nsudo sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config\nsudo systemctl stop firewalld || true\nsudo systemctl disable firewalld || true\n#sudo rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm\n#sudo yum update -y\n#sudo yum install -y nginx php56w-fpm php56w-cli php56w-mcrypt php56w-mysql php56w-mbstring php56w-dom git unzip\n\n# Nginx, PHP-FPM und PHP-MySQL Erweiterung auf Rocky 9 installieren\n# sudo dnf install -y nginx php php-fpm php-mysqlnd php-cli git unzip curl\n\n# 1. EPEL und Remi-Release Repository (für ältere PHP-Versionen auf Rocky 9) hinzufügen\nsudo dnf install -y epel-release\nsudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm\n\n# 2. Das Standard-PHP (8.0) deaktivieren und PHP 7.4 aktivieren\nsudo dnf module reset php -y\nsudo dnf module enable php:remi-7.4 -y\n\n# 3. Nginx, PHP 7.4 und Tools installieren\nsudo dnf install -y nginx php php-fpm php-mysqlnd php-cli git unzip curl",
+										"script_type": "sh",
+										"command_line_args": "",
+										"exit_status": [],
+										"login_credential_local_reference": {
+											"name": "CENTOS_PASS",
+											"kind": "app_credential"
+										}
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "WebServer",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								}
+							],
+							"main_task_local_reference": {
+								"name": "7c1beb17_dag",
+								"kind": "app_task"
+							},
+							"variable_list": []
+						},
+						"uninstall_runbook": {
+							"name": "763d599f_runbook",
+							"description": "",
+							"task_definition_list": [
+								{
+									"type": "DAG",
+									"name": "d91f3e9d_dag",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"edges": [
+											{
+												"type": "",
+												"from_task_reference": {
+													"name": "Leave Domain",
+													"kind": "app_task"
+												},
+												"to_task_reference": {
+													"name": "Uninstall_WebServer",
+													"kind": "app_task"
+												},
+												"edge_type": "user_defined"
+											}
+										]
+									},
+									"child_tasks_local_reference_list": [
+										{
+											"name": "Leave Domain",
+											"kind": "app_task"
+										},
+										{
+											"name": "Uninstall_WebServer",
+											"kind": "app_task"
+										}
+									],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "WebServer_PACKAGE",
+										"kind": "app_package"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "CALL_RUNBOOK",
+									"name": "Leave Domain",
+									"description": "",
+									"attrs": {
+										"type": "CALL_RUNBOOK",
+										"runbook_reference": {
+											"name": "1604cef0_runbook",
+											"kind": "app_runbook"
+										},
+										"inarg_list": []
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "WebServer",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "EXEC",
+									"name": "Uninstall_WebServer",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"script": "#!/bin/bash\nset -ex\n\nsudo rm -rf /var/www/laravel\nsudo yum erase -y nginx",
+										"script_type": "sh",
+										"command_line_args": "",
+										"exit_status": [],
+										"login_credential_local_reference": {
+											"name": "CENTOS_PASS",
+											"kind": "app_credential"
+										}
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "WebServer",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								}
+							],
+							"main_task_local_reference": {
+								"name": "d91f3e9d_dag",
+								"kind": "app_task"
+							},
+							"variable_list": []
+						},
+						"upgrade_runbook": {}
+					}
+				},
+				{
+					"type": "SUBSTRATE_IMAGE",
+					"name": "CentOS_7_Gnome",
+					"description": "CentOS 7 Gnome Image",
+					"variable_list": [],
+					"action_list": [],
+					"service_local_reference_list": [],
+					"version": "",
+					"options": {
+						"type": "",
+						"name": "CentOS_Gnome",
+						"resources": {
+							"type": "",
+							"image_type": "DISK_IMAGE",
+							"checksum": {
+								"type": "",
+								"checksum_algorithm": "",
+								"checksum_value": ""
+							},
+							"source_uri": "https://storage.googleapis.com/testdrive-templates/library/images/CentOS-7-Gnome.qcow2",
+							"version": {
+								"type": "",
+								"product_version": "7",
+								"product_name": "CentOS"
+							},
+							"architecture": "X86_64"
+						},
+						"description": ""
+					}
+				}
+			],
+			"app_profile_list": [
+				{
+					"name": "Default",
+					"description": "",
+					"variable_list": [
+						{
+							"type": "LOCAL",
+							"name": "Database_name",
+							"description": "",
+							"is_hidden": false,
+							"is_mandatory": false,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": "homestead"
+						},
+						{
+							"type": "SECRET",
+							"name": "Mysql_password",
+							"description": "",
+							"is_hidden": false,
+							"is_mandatory": false,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "",
+							"attrs": {
+								"type": "SECRET",
+								"is_secret_modified": false,
+								"secret_reference": {}
+							},
+							"editables": {
+								"value": true
+							},
+							"value": ""
+						},
+						{
+							"type": "LOCAL",
+							"name": "Mysql_user",
+							"description": "",
+							"is_hidden": false,
+							"is_mandatory": false,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": "root"
+						},
+						{
+							"type": "LOCAL",
+							"name": "user_initials",
+							"description": "",
+							"regex": {
+								"value": "[a-z]{2,}[0-9]{2,}",
+								"should_validate": true
+							},
+							"options": {
+								"type": "PREDEFINED",
+								"choices": []
+							},
+							"is_hidden": false,
+							"is_mandatory": true,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": ""
+						},
+						{
+							"type": "LOCAL",
+							"name": "Domain",
+							"description": "",
+							"options": {
+								"type": "PREDEFINED",
+								"choices": []
+							},
+							"is_hidden": false,
+							"is_mandatory": true,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": "ntnxlab.local"
+						},
+						{
+							"type": "LOCAL",
+							"name": "AD_ADMINGROUP",
+							"description": "",
+							"options": {
+								"type": "PREDEFINED",
+								"choices": []
+							},
+							"is_hidden": false,
+							"is_mandatory": true,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": "SSP Admins"
+						}
+					],
+					"action_list": [],
+					"deployment_create_list": [
+						{
+							"type": "GREENFIELD",
+							"name": "218298bc_deployment",
+							"description": "",
+							"variable_list": [],
+							"action_list": [],
+							"depends_on_list": [],
+							"min_replicas": "1",
+							"max_replicas": "1",
+							"default_replicas": "1",
+							"package_local_reference_list": [
+								{
+									"name": "WebServer_PACKAGE",
+									"kind": "app_package"
+								}
+							],
+							"substrate_local_reference": {
+								"name": "WebServer_AHV",
+								"kind": "app_substrate"
+							},
+							"published_service_local_reference_list": []
+						},
+						{
+							"type": "GREENFIELD",
+							"name": "7dbb8a8a_deployment",
+							"description": "",
+							"variable_list": [],
+							"action_list": [],
+							"depends_on_list": [],
+							"min_replicas": "1",
+							"max_replicas": "1",
+							"default_replicas": "1",
+							"package_local_reference_list": [
+								{
+									"name": "MYSQL_PACKAGE",
+									"kind": "app_package"
+								}
+							],
+							"substrate_local_reference": {
+								"name": "MySQL_AHV",
+								"kind": "app_substrate"
+							},
+							"published_service_local_reference_list": []
+						}
+					],
+					"snapshot_config_list": [],
+					"restore_config_list": [],
+					"environment_reference_list": [],
+					"application_url": "",
+					"patch_list": []
+				}
+			],
+			"credential_definition_list": [
+				{
+					"type": "PASSWORD",
+					"name": "CENTOS_PASS",
+					"description": "",
+					"username": "centos",
+					"secret": {
+						"attrs": {
+							"secret_reference": {},
+							"is_secret_modified": false
+						}
+					},
+					"cred_class": "static"
+				},
+				{
+					"type": "PASSWORD",
+					"name": "CRED_DC",
+					"description": "",
+					"username": "administrator@ntnxlab.local",
+					"secret": {
+						"attrs": {
+							"secret_reference": {},
+							"is_secret_modified": false
+						}
+					},
+					"cred_class": "static"
+				}
+			],
+			"default_credential_local_reference": {
+				"name": "CENTOS_PASS",
+				"kind": "app_credential"
+			},
+			"type": "USER",
+			"client_attrs": {
+				"null": {
+					"y": -108.1280483962,
+					"x": 524.8596632591
+				},
+				"218298bc_deployment": {
+					"y": 180.6691739873,
+					"x": 815.769159956
+				},
+				"7dbb8a8a_deployment": {
+					"y": 180,
+					"x": 316
+				}
+			},
+			"global_variable_reference_list": []
+		}
+	},
+	"api_version": "3.0",
+	"product_version": "4.3.1",
+	"metadata": {
+		"last_update_time": "1777018413683223",
+		"creation_time": "1776858692656613",
+		"spec_version": 15,
+		"name": "TaskMan",
+		"kind": "blueprint"
+	},
+	"contains_secrets": false
+}
