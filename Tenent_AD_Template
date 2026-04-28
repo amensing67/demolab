@@ -1,0 +1,652 @@
+{
+	"status": {},
+	"spec": {
+		"name": "Tenant-AD",
+		"description": "",
+		"resources": {
+			"service_definition_list": [
+				{
+					"name": "Service1",
+					"description": "",
+					"variable_list": [],
+					"action_list": [
+						{
+							"type": "system",
+							"name": "action_create",
+							"description": "System action for creating an application",
+							"runbook": {
+								"name": "099bdbe0_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "c01fb8aa_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "Service1",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "c01fb8aa_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_delete",
+							"description": "System action for deleting an application. Deletes created VMs as well",
+							"runbook": {
+								"name": "0c49053c_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "76890d77_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "Service1",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "76890d77_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_start",
+							"description": "System action for starting an application",
+							"runbook": {
+								"name": "626d412e_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "bc226aa8_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "Service1",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "bc226aa8_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_stop",
+							"description": "System action for stopping an application",
+							"runbook": {
+								"name": "185ecd1e_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "865338fc_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "Service1",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "865338fc_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						},
+						{
+							"type": "system",
+							"name": "action_restart",
+							"description": "System action for restarting an application",
+							"runbook": {
+								"name": "8c681d39_runbook",
+								"description": "",
+								"task_definition_list": [
+									{
+										"type": "DAG",
+										"name": "83b56563_dag",
+										"description": "",
+										"attrs": {
+											"type": "",
+											"edges": []
+										},
+										"child_tasks_local_reference_list": [],
+										"variable_list": [],
+										"target_any_local_reference": {
+											"name": "Service1",
+											"kind": "app_service"
+										},
+										"timeout_secs": "0",
+										"retries": "0",
+										"inherit_target": false,
+										"status_map_list": []
+									}
+								],
+								"main_task_local_reference": {
+									"name": "83b56563_dag",
+									"kind": "app_task"
+								},
+								"variable_list": []
+							},
+							"critical": false
+						}
+					],
+					"depends_on_list": [],
+					"port_list": [],
+					"singleton": false,
+					"tier": ""
+				}
+			],
+			"published_service_definition_list": [],
+			"substrate_definition_list": [
+				{
+					"type": "AHV_VM",
+					"name": "DC01",
+					"description": "",
+					"variable_list": [],
+					"action_list": [],
+					"editables": {
+						"create_spec": {
+							"name": true,
+							"resources": {
+								"nic_list": {
+									"0": {
+										"ip_endpoint_list": true
+									}
+								}
+							}
+						}
+					},
+					"create_spec": {
+						"type": "",
+						"name": "vm-@@{tenant_name}@@-@@{name}@@-@@{calm_time}@@",
+						"availability_zone_reference": null,
+						"backup_policy": null,
+						"cluster_reference": {
+							"type": "",
+							"kind": "cluster",
+							"name": "DM3-POC140",
+							"uuid": "00064f93-0b03-4ea5-0a1f-a088c250260e"
+						},
+						"resources": {
+							"type": "",
+							"nic_list": [
+								{
+									"type": "",
+									"nic_type": "NORMAL_NIC",
+									"subnet_reference": {
+										"type": "",
+										"kind": "subnet",
+										"name": "",
+										"uuid": "c20f390f-2b93-4d2f-a187-f5577d73c0a9"
+									},
+									"network_function_nic_type": "INGRESS",
+									"mac_address": "",
+									"ip_endpoint_list": [],
+									"network_function_chain_reference": null,
+									"vpc_reference": null
+								}
+							],
+							"power_state": "ON",
+							"guest_tools": null,
+							"num_vcpus_per_socket": 1,
+							"num_sockets": 2,
+							"memory_size_mib": 4096,
+							"gpu_list": [],
+							"parent_reference": null,
+							"hardware_clock_timezone": "",
+							"account_uuid": "e2605c5c-15c4-4e75-af60-b4430e3093bf",
+							"guest_customization": {
+								"type": "",
+								"cloud_init": null,
+								"sysprep": {
+									"type": "",
+									"install_type": "PREPARED",
+									"unattend_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<unattend xmlns=\"urn:schemas-microsoft-com:unattend\">\n   <settings pass=\"oobeSystem\">\n      <component name=\"Microsoft-Windows-Shell-Setup\" xmlns:wcm=\"http://schemas.microsoft.com/WMIConfig/2002/State\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\">\n         <OOBE>\n            <HideEULAPage>true</HideEULAPage>\n            <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>\n            <HideOnlineAccountScreens>true</HideOnlineAccountScreens>\n            <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>\n            <NetworkLocation>Work</NetworkLocation>\n            <SkipMachineOOBE>true</SkipMachineOOBE>\n         </OOBE>\n\t <ComputerName>@@{computer_name}@@</ComputerName>\n         <UserAccounts>\n            <AdministratorPassword>\n               <Value>@@{local_admin.secret}@@</Value>\n               <PlainText>true</PlainText>\n            </AdministratorPassword>\n         </UserAccounts>\n         <AutoLogon>\n            <Password>\n               <Value>@@{local_admin.secret}@@</Value>\n               <PlainText>true</PlainText>\n            </Password>\n            <Enabled>true</Enabled>\n            <Username>@@{local_admin.username}@@</Username>\n         </AutoLogon>\n         <FirstLogonCommands>\n            <SynchronousCommand wcm:action=\"add\">\n               <CommandLine>cmd.exe /c netsh firewall add portopening TCP 5985 \"Port 5985\"</CommandLine>\n               <Description>Win RM port open</Description>\n               <Order>1</Order>\n               <RequiresUserInput>true</RequiresUserInput>\n            </SynchronousCommand>\n            <SynchronousCommand wcm:action=\"add\">\n               <CommandLine>powershell -Command \"Enable-PSRemoting -SkipNetworkProfileCheck -Force\"</CommandLine>\n               <Description>Enable PS-Remoting</Description>\n               <Order>2</Order>\n               <RequiresUserInput>true</RequiresUserInput>\n            </SynchronousCommand>\n            <SynchronousCommand wcm:action=\"add\">\n               <CommandLine>powershell -Command \"Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force\"</CommandLine>\n               <Description>Enable Remote-Signing</Description>\n               <Order>3</Order>\n               <RequiresUserInput>false</RequiresUserInput>\n            </SynchronousCommand>\n            <SynchronousCommand wcm:action=\"add\">\n               <CommandLine>powershell -Command \"Install-WindowsFeature -IncludeAllSubFeature -ErrorAction Stop \"Net-Framework-Core\"\"</CommandLine>\n               <Description>Install dotNet</Description>\n               <Order>4</Order>\n               <RequiresUserInput>false</RequiresUserInput>\n            </SynchronousCommand>\n         </FirstLogonCommands>   \n      </component>\n      <component name=\"Microsoft-Windows-International-Core\" xmlns:wcm=\"http://schemas.microsoft.com/WMIConfig/2002/State\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\">\n         <InputLocale>en-US</InputLocale>\n         <SystemLocale>en-US</SystemLocale>\n         <UILanguageFallback>en-us</UILanguageFallback>\n         <UILanguage>en-US</UILanguage>\n         <UserLocale>en-US</UserLocale>\n      </component>\n   </settings>\n   <settings pass=\"specialize\">\n      <component name=\"Microsoft-Windows-Shell-Setup\" xmlns:wcm=\"http://schemas.microsoft.com/WMIConfig/2002/State\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\">\n         <ComputerName>@@{computer_name}@@</ComputerName>\n         <RegisteredOrganization>Nutanix</RegisteredOrganization>\n         <RegisteredOwner>Acropolis</RegisteredOwner>\n         <TimeZone>UTC</TimeZone>\n      </component>\n      <component name=\"Microsoft-Windows-TerminalServices-LocalSessionManager\" xmlns=\"\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\" processorArchitecture=\"amd64\">\n         <fDenyTSConnections>false</fDenyTSConnections>\n      </component>\n      <component name=\"Microsoft-Windows-TerminalServices-RDP-WinStationExtensions\" xmlns=\"\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\" processorArchitecture=\"amd64\">\n         <UserAuthentication>0</UserAuthentication>\n      </component>\n      <component name=\"Networking-MPSSVC-Svc\" xmlns:wcm=\"http://schemas.microsoft.com/WMIConfig/2002/State\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\">\n         <FirewallGroups>\n            <FirewallGroup wcm:action=\"add\" wcm:keyValue=\"RemoteDesktop\">\n               <Active>true</Active>\n               <Profile>all</Profile>\n               <Group>@FirewallAPI.dll,-28752</Group>\n            </FirewallGroup>\n         </FirewallGroups>\n      </component>\n   </settings>\n</unattend>",
+									"is_domain": false,
+									"domain": "",
+									"domain_credential_reference": null,
+									"dns_ip": "",
+									"dns_search_path": ""
+								}
+							},
+							"boot_config": {
+								"type": "",
+								"boot_device": {
+									"type": "",
+									"disk_address": {
+										"type": "",
+										"device_index": 0,
+										"adapter_type": "SCSI"
+									}
+								},
+								"mac_address": "",
+								"boot_type": "LEGACY"
+							},
+							"vtpm_config": null,
+							"disk_list": [
+								{
+									"type": "",
+									"data_source_reference": {
+										"type": "",
+										"kind": "image",
+										"name": "Windows2019.qcow2",
+										"uuid": "0a77f1e4-096c-4ace-a123-7884801473f3"
+									},
+									"volume_group_reference": null,
+									"device_properties": {
+										"type": "",
+										"disk_address": {
+											"type": "",
+											"device_index": 0,
+											"adapter_type": "SCSI"
+										},
+										"device_type": "DISK"
+									},
+									"disk_size_mib": 76293
+								}
+							],
+							"serial_port_list": []
+						},
+						"categories": {
+							"OSType": "Windows"
+						}
+					},
+					"os_type": "Windows",
+					"readiness_probe": {
+						"login_credential_local_reference": {
+							"name": "local_admin",
+							"kind": "app_credential"
+						},
+						"connection_type": "POWERSHELL",
+						"connection_port": 5985,
+						"delay_secs": "60",
+						"retries": "5",
+						"address": "@@{platform.status.resources.nic_list[0].ip_endpoint_list[0].ip}@@",
+						"disable_readiness_probe": false,
+						"connection_protocol": "http"
+					}
+				}
+			],
+			"package_definition_list": [
+				{
+					"type": "DEB",
+					"name": "Package1",
+					"description": "",
+					"variable_list": [],
+					"action_list": [],
+					"service_local_reference_list": [
+						{
+							"name": "Service1",
+							"kind": "app_service"
+						}
+					],
+					"version": "",
+					"options": {
+						"type": "",
+						"install_runbook": {
+							"name": "86395a2a_runbook",
+							"description": "",
+							"task_definition_list": [
+								{
+									"type": "DAG",
+									"name": "7ec3e568_dag",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"edges": [
+											{
+												"type": "",
+												"from_task_reference": {
+													"name": "Prepare_Config_Scripts",
+													"kind": "app_task"
+												},
+												"to_task_reference": {
+													"name": "Launch_AD_Deployment",
+													"kind": "app_task"
+												},
+												"edge_type": "user_defined"
+											}
+										]
+									},
+									"child_tasks_local_reference_list": [
+										{
+											"name": "Prepare_Config_Scripts",
+											"kind": "app_task"
+										},
+										{
+											"name": "Launch_AD_Deployment",
+											"kind": "app_task"
+										}
+									],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "Package1",
+										"kind": "app_package"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "EXEC",
+									"name": "Prepare_Config_Scripts",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"script": "# ====================================================================\n# 1. Calm Macros isoliert in PowerShell-Variablen laden (Best Practice)\n# ====================================================================\n$DomainName = \"@@{domain_name}@@\"\n$DomainTld  = \"@@{domain_tld}@@\"\n$CompName   = \"@@{computer_name}@@\"\n$AdminUser  = \"@@{local_admin.username}@@\"\n$AdminPass  = \"@@{local_admin.secret}@@\"\n\n# PowerShell übernimmt das Zusammenbauen (Concatenation)\n$FullDomain = \"$DomainName.$DomainTld\"\n$LogonUser  = \"$DomainName\\$AdminUser\"\n$Fqdn       = \"$CompName.$DomainName.$DomainTld\".ToLower()\n\n# ====================================================================\n# 2. Ordner anlegen\n# ====================================================================\n$scriptPath = \"C:\\Config_Scripts\"\nif (!(Test-Path $scriptPath)) {\n    New-Item -ItemType Directory -Path $scriptPath -Force\n}\n\n# ====================================================================\n# 3. WindowsDC_01.ps1 erstellen\n# ====================================================================\n$Script01 = @\"\nSet-AutoLogon -DefaultUsername \"$LogonUser\" -DefaultPassword \"$AdminPass\"\nSet-Location -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce'\nSet-ItemProperty -Path . -Name deployAD -Value 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe \"C:\\Config_Scripts\\WindowsDC_02.ps1\"'\nRename-Computer -NewName \"$CompName\"\nRestart-Computer\n\"@\n$Script01 | Out-File -FilePath \"C:\\Config_Scripts\\WindowsDC_01.ps1\" -Encoding UTF8\n\n# ====================================================================\n# 4. WindowsDC_02.ps1 erstellen\n# ====================================================================\n# Wichtig: Variablen, die in der Zieldatei Variablen bleiben sollen (wie $securepw),\n# bekommen einen Backtick (`). Unsere Werte wie $FullDomain werden direkt als Text eingefügt.\n$Script02 = @\"\n`$plainpw = \"$AdminPass\"\n`$securepw = ConvertTo-SecureString -AsPlainText `$plainpw -Force\n\nInstall-WindowsFeature AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools\nImport-Module ADDSDeployment\n\nInstall-ADDSForest -DomainName \"$FullDomain\" -DomainNetbiosName \"$DomainName\" -SafeModeAdministratorPassword `$securepw -CreateDnsDelegation:`$false -DomainMode \"Win2012R2\" -ForestMode \"Win2012R2\" -InstallDns:`$true -Force:`$true -NoRebootOnCompletion -DatabasePath \"C:\\Windows\\NTDS\" -LogPath \"C:\\Windows\\NTDS\" -SysvolPath \"C:\\Windows\\SYSVOL\"\n\nSet-AutoLogon -DefaultUsername \"$LogonUser\" -DefaultPassword \"$AdminPass\"\nSet-Location -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce'\nSet-ItemProperty -Path . -Name addDomainUsers -Value 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe \"C:\\Config_Scripts\\WindowsDC_03.ps1\"'\nRestart-Computer\n\"@\n$Script02 | Out-File -FilePath \"C:\\Config_Scripts\\WindowsDC_02.ps1\" -Encoding UTF8\n\n# ====================================================================\n# 5. WindowsDC_03.ps1 erstellen (Auszug)\n# ====================================================================\n$Script03 = @\"\n`$password = \"$AdminPass\" | ConvertTo-SecureString -asPlainText -Force\n`$username = \"$LogonUser\" \n`$credential = New-Object System.Management.Automation.PSCredential(`$username,`$password)\n\nImport-module activedirectory\n`$Groups = Import-csv C:\\Config_Scripts\\WindowsDC_add-groups.csv\n\n`$OU = \"CN=Users, DC=$DomainName, DC=$DomainTld\"\n\nForEach(`$UserGroup in `$Groups) {\n    `$Group = `$UserGroup.group\n    New-ADGroup -Name `$Group -GroupScope Global -Credential `$credential\n    `$Users = Import-csv \"C:\\Config_Scripts\\WindowsDC_add-users_`$Group.csv\"\n    ForEach(`$User in `$Users) {\n        `$FullName = `$User.FirstName\n        `$SAM = `$User.FirstName.tolower()\n        `$dnsroot = '@' + (Get-ADDomain).dnsroot\n        `$UPN = `$SAM + \"`$dnsroot\"\n        New-ADUser -Name `$FullName -AccountPassword (ConvertTo-SecureString `$User.password -AsPlainText -force) -GivenName `$User.FirstName -Path `$OU -SamAccountName `$SAM -Surname `$User.LastName -UserPrincipalName `$UPN -Enabled `$TRUE -Credential `$credential\n        Add-ADGroupMember -Identity `$Group -Members `$SAM -Credential `$credential\n    }\n}\n\n# (Reverse DNS Code hier, falls benötigt)\n\nSet-AutoLogon -DefaultUsername \"$LogonUser\" -DefaultPassword \"$AdminPass\"\nSet-Location -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce'\nSet-ItemProperty -Path . -Name \"finishDeployment\" -Value 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe \"C:\\Config_Scripts\\WindowsDC_04.ps1\"'\nRestart-Computer\n\"@\n$Script03 | Out-File -FilePath \"C:\\Config_Scripts\\WindowsDC_03.ps1\" -Encoding UTF8\n\n# ====================================================================\n# 6. WindowsDC_04.ps1 erstellen (Readiness Probe / Cleanup)\n# ====================================================================\n$Script04 = @\"\n`$rootCertStore = \"cert:\\LocalMachine\\Root\"\n`$tempCertFilePath = \"C:\\tempCert.cer\"\n\n`$interface = Get-NetAdapter | Where-Object { `$_.Name -like \"*Ethernet*\" } | Select-Object -First 1\n`$adServerIP = (Get-NetIPAddress -InterfaceAlias `$interface.Name -AddressFamily IPv4).IPAddress\n`$adServerFQDN = \"$Fqdn\"\n\n`$certificateParams = @{\n    DnsName = `$adServerIP, `$adServerFQDN\n    CertStoreLocation = \"cert:\\LocalMachine\\My\"\n    KeyUsage = \"KeyEncipherment\", \"DigitalSignature\"\n    KeyLength = 2048\n    KeyAlgorithm = \"RSA\"\n    HashAlgorithm = \"SHA256\"\n    NotAfter = (Get-Date).AddYears(1)\n    Provider = \"Microsoft Enhanced RSA and AES Cryptographic Provider\"\n    FriendlyName = \"LDAPS Certificate\"\n    TextExtension = @(\"2.5.29.37={text}1.3.6.1.5.5.7.3.1\")\n}\n\n`$cert = New-SelfSignedCertificate @certificateParams\nExport-Certificate -Cert `$cert -FilePath `$tempCertFilePath\nImport-Certificate -FilePath `$tempCertFilePath -CertStoreLocation `$rootCertStore\n\nRestart-Service -Name NTDS -Force\nw32tm /config /manualpeerlist:216.239.35.0,0x8 /syncfromflags:manual /reliable:yes /update\nSet-NetFirewallProfile -Profile Domain,Public,Private -Enabled False\n\n# AutoLogon Cleanup\n`$regPath = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\"\nSet-ItemProperty -Path `$regPath -Name \"AutoAdminLogon\" -Value \"0\"\nRemove-ItemProperty -Path `$regPath -Name \"DefaultUserName\" -ErrorAction SilentlyContinue\nRemove-ItemProperty -Path `$regPath -Name \"DefaultPassword\" -ErrorAction SilentlyContinue\nSet-Location -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce'\nRemove-ItemProperty -Path . -Name \"finishDeployment\" -ErrorAction SilentlyContinue\n\n# HTTP Listener Start\nif (-not [System.Net.HttpListener]::IsSupported) { exit 1 }\n`$port = \"8000\"\n`$listener = New-Object System.Net.HttpListener\n`$url = -join (\"http://\", `$adServerIP, \":\", `$port, \"/\")\n`$listener.Prefixes.Add(`$url)\n\ntry { `$listener.Start() } catch { exit 1 }\n\nwhile (`$listener.IsListening) {\n    `$context = `$listener.GetContext()\n    `$response = `$context.Response\n    `$response.ContentType = \"text/plain\"\n    `$content = [System.Text.Encoding]::UTF8.GetBytes(\"AD Is Running\")\n    `$response.OutputStream.Write(`$content,0,`$content.Length)\n    `$response.Close()\n}\n`$listener.Stop()\n\"@\n$Script04 | Out-File -FilePath \"C:\\Config_Scripts\\WindowsDC_04.ps1\" -Encoding UTF8",
+										"script_type": "npsscript",
+										"command_line_args": "",
+										"exit_status": [],
+										"login_credential_local_reference": {
+											"name": "local_admin",
+											"kind": "app_credential"
+										}
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "Service1",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								},
+								{
+									"type": "EXEC",
+									"name": "Launch_AD_Deployment",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"script": "# Sicherstellen, dass das Skript existiert und dann ausführen\n#if (Test-Path \"C:\\Config_Scripts\\WindowsDC_01.ps1\") {\n#    powershell.exe -ExecutionPolicy Bypass -File \"C:\\Config_Scripts\\WindowsDC_01.ps1\"\n#} else {\n#    Write-Error \"Initiales Skript nicht gefunden!\"\n#    exit 1\n#}",
+										"script_type": "npsscript",
+										"command_line_args": "",
+										"exit_status": [],
+										"login_credential_local_reference": {
+											"name": "local_admin",
+											"kind": "app_credential"
+										}
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "Service1",
+										"kind": "app_service"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								}
+							],
+							"main_task_local_reference": {
+								"name": "7ec3e568_dag",
+								"kind": "app_task"
+							},
+							"variable_list": []
+						},
+						"uninstall_runbook": {
+							"name": "02869526_runbook",
+							"description": "",
+							"task_definition_list": [
+								{
+									"type": "DAG",
+									"name": "efe30183_dag",
+									"description": "",
+									"attrs": {
+										"type": "",
+										"edges": []
+									},
+									"child_tasks_local_reference_list": [],
+									"variable_list": [],
+									"target_any_local_reference": {
+										"name": "Package1",
+										"kind": "app_package"
+									},
+									"timeout_secs": "0",
+									"retries": "0",
+									"inherit_target": false,
+									"status_map_list": []
+								}
+							],
+							"main_task_local_reference": {
+								"name": "efe30183_dag",
+								"kind": "app_task"
+							},
+							"variable_list": []
+						},
+						"upgrade_runbook": {}
+					}
+				}
+			],
+			"app_profile_list": [
+				{
+					"name": "Default",
+					"description": "",
+					"variable_list": [
+						{
+							"type": "LOCAL",
+							"name": "tenant_name",
+							"description": "Name of the new tenant\n| example: tenant01",
+							"regex": {
+								"value": "[A-Za-z0-9]+_.*$",
+								"should_validate": false
+							},
+							"options": {
+								"type": "PREDEFINED",
+								"choices": []
+							},
+							"is_hidden": false,
+							"is_mandatory": true,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "Tenant Name",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": ""
+						},
+						{
+							"type": "LOCAL",
+							"name": "computer_name",
+							"description": "Name of the computer (Windows)\n| example: DC01",
+							"options": {
+								"type": "PREDEFINED",
+								"choices": []
+							},
+							"is_hidden": false,
+							"is_mandatory": true,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "Computer name",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": ""
+						},
+						{
+							"type": "LOCAL",
+							"name": "domain_name",
+							"description": "Name of the MS AD\n| (will also as the NETBIOS name)\n| example: NTNXLAB",
+							"options": {
+								"type": "PREDEFINED",
+								"choices": []
+							},
+							"is_hidden": false,
+							"is_mandatory": true,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "AD-Domain name",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": ""
+						},
+						{
+							"type": "LOCAL",
+							"name": "domain_tld",
+							"description": "Suffix (Top-Level-Domain)\n| example: local",
+							"options": {
+								"type": "PREDEFINED",
+								"choices": []
+							},
+							"is_hidden": false,
+							"is_mandatory": true,
+							"data_type": "BASE",
+							"val_type": "STRING",
+							"label": "AD-Domain TLD",
+							"attrs": {
+								"type": ""
+							},
+							"editables": {
+								"value": true
+							},
+							"value": ""
+						}
+					],
+					"action_list": [],
+					"deployment_create_list": [
+						{
+							"type": "GREENFIELD",
+							"name": "deployment_a0b39c32",
+							"description": "",
+							"variable_list": [],
+							"action_list": [],
+							"depends_on_list": [],
+							"min_replicas": "1",
+							"max_replicas": "1",
+							"default_replicas": "1",
+							"package_local_reference_list": [
+								{
+									"name": "Package1",
+									"kind": "app_package"
+								}
+							],
+							"substrate_local_reference": {
+								"name": "DC01",
+								"kind": "app_substrate"
+							},
+							"published_service_local_reference_list": []
+						}
+					],
+					"snapshot_config_list": [],
+					"restore_config_list": [],
+					"environment_reference_list": [],
+					"application_url": "",
+					"patch_list": []
+				}
+			],
+			"credential_definition_list": [
+				{
+					"type": "PASSWORD",
+					"name": "local_admin",
+					"description": "",
+					"editables": {
+						"secret": true,
+						"username": true
+					},
+					"username": "administrator",
+					"secret": {
+						"attrs": {
+							"secret_reference": {},
+							"is_secret_modified": false
+						}
+					},
+					"cred_class": "static"
+				}
+			],
+			"default_credential_local_reference": {
+				"name": "local_admin",
+				"kind": "app_credential"
+			},
+			"type": "USER",
+			"client_attrs": {},
+			"global_variable_reference_list": []
+		}
+	},
+	"api_version": "3.0",
+	"product_version": "4.3.1",
+	"metadata": {
+		"last_update_time": "1777364721746850",
+		"creation_time": "1776776060314499",
+		"spec_version": 18,
+		"name": "Tenant-AD",
+		"kind": "blueprint",
+		"categories": {
+			"TemplateType": "Vm"
+		}
+	},
+	"contains_secrets": false
+}
