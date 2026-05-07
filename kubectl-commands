@@ -1,3 +1,9 @@
+kubectl --kubeconfig "am-nkp-mgmt (1).conf" get nodes
+kubectl --kubeconfig "am-nkp-mgmt (1).conf" get cluster
+kubectl config view
+
+export KUBECONFIG="am-nkp-mgmt (1).conf:workload1-kubeconfig (1).yaml"
+
 kubectl config get-contexts
-kubectl config current-context
-kubectl config use-context <name-des-kontexts>
+kubectl config use-context workload1-admin@workload1
+kubectl config use-context am-nkp-mgmt-admin@am-nkp-mgmt
